@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.stars.app.lazyterminator.activity.ProjectsListActivity">
+    <item android:id="@+id/action_newproject"
+          android:title="@string/action_newproject"
+          android:icon="@drawable/content_new"
+          android:showAsAction="ifRoom"
+          />
+</menu>
