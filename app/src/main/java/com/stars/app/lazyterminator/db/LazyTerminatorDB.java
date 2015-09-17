@@ -56,10 +56,10 @@ public class LazyTerminatorDB {
                 .query("tb_project", null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             do {
-                Project project = new Project(0, null, null);
+                Project project = new Project(0, null, 0);
                 project.setProjectId(cursor.getInt(cursor.getColumnIndex("project_id")));
                 project.setProjectName(cursor.getString(cursor.getColumnIndex("project_name")));
-                project.setProjectPriority(cursor.getString(cursor.getColumnIndex("project_priority")));
+                project.setProjectPriority(cursor.getInt(cursor.getColumnIndex("project_priority")));
                 list.add(project);
 
             } while (cursor.moveToNext());

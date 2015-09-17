@@ -6,25 +6,25 @@ package com.stars.app.lazyterminator.model;
 public class Project {
     private int projectId;
     private String projectName;
-    private String projectPriority;
+    private int projectPriority;
 
     public Project(int projectId, String projectName) {
         this.projectId = projectId;
         this.projectName = projectName;
-        this.projectPriority = "narmal";
+        this.projectPriority = 1;
     }
 
-    public Project(int projectId, String projectName, String projectPriority) {
+    public Project(int projectId, String projectName, int projectPriority) {
         this.projectId = projectId;
         this.projectName = projectName;
         this.projectPriority = projectPriority;
     }
 
-    public String getProjectPriority() {
+    public int getProjectPriority() {
         return projectPriority;
     }
 
-    public void setProjectPriority(String projectPriority) {
+    public void setProjectPriority(int projectPriority) {
         this.projectPriority = projectPriority;
     }
 

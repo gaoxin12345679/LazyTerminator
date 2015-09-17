@@ -1,24 +1,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:swipe="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@drawable/bg14thumb"
               android:orientation="vertical"
               tools:context="com.stars.app.lazyterminator.activity.ProjectsListActivity">
-    <include layout="@layout/toolbar_project_list"/>
-    <com.fortysevendeg.swipelistview.SwipeListView
-        android:id="@+id/slv_project_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="#ff000000"
-        app:swipeFrontView="@id/item_front"
-        app:swipeBackView="@id/item_back"
-        app:swipeCloseAllItemsWhenMoveList="true"
-        app:swipeActionLeft="reveal"
-        app:swipeMode="left"
-        app:swipeOpenOnLongPress="false"
-        android:background="#ff8888ff">
-    </com.fortysevendeg.swipelistview.SwipeListView>
 
+    <include layout="@layout/toolbar_project_list"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.fortysevendeg.swipelistview.SwipeListView
+            android:id="@+id/slv_project_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            swipe:swipeActionLeft="reveal"
+            swipe:swipeActionRight="reveal"
+            swipe:swipeAnimationTime="0"
+            swipe:swipeBackView="@+id/item_back"
+            swipe:swipeCloseAllItemsWhenMoveList="true"
+            swipe:swipeFrontView="@+id/item_front"
+            swipe:swipeMode="both"
+            swipe:swipeOffsetLeft="100dp"
+            swipe:swipeOffsetRight="100dp"
+            swipe:swipeOpenOnLongPress="false">
+        </com.fortysevendeg.swipelistview.SwipeListView>
+    </FrameLayout>
 </LinearLayout>
