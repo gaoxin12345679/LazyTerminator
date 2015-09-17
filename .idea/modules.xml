@@ -3,9 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LazyTerminator.iml" filepath="$PROJECT_DIR$/LazyTerminator.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SystemBarTint/SystemBarTint.iml" filepath="$PROJECT_DIR$/SystemBarTint/SystemBarTint.iml" />
-      <module fileurl="file://$PROJECT_DIR$/actionbarsherlock/actionbarsherlock.iml" filepath="$PROJECT_DIR$/actionbarsherlock/actionbarsherlock.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/swipelistview/swipelistview.iml" filepath="$PROJECT_DIR$/swipelistview/swipelistview.iml" />
     </modules>
   </component>
 </project>

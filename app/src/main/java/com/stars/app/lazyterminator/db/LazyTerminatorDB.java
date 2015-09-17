@@ -61,7 +61,7 @@ public class LazyTerminatorDB {
                 project.setProjectName(cursor.getString(cursor.getColumnIndex("project_name")));
                 project.setProjectPriority(cursor.getString(cursor.getColumnIndex("project_priority")));
                 list.add(project);
-                
+
             } while (cursor.moveToNext());
         }
         return list;

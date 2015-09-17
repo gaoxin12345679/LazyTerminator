@@ -2,44 +2,56 @@ package com.stars.app.lazyterminator.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 import com.stars.app.lazyterminator.R;
 
 public class NewProjectActivity extends BaseActivity {
-    private ActionBar mActionBar;
+    public static String TAG = "NewProjectActivity";
+    private Toolbar mToolbar;
     private EditText mEditText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_project);
-        mActionBar = getSupportActionBar();
-        mActionBar.setDisplayShowHomeEnabled(false);
-        mActionBar.setTitle("New Project");
+
         mEditText = (EditText)findViewById(R.id.et_new_project_name);
+        mToolbar = (Toolbar)findViewById(R.id.toolbar_project_new);
+        mToolbar.setTitle("New Project");
+        setSupportActionBar(mToolbar);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        /* 菜单的监听可以在toolbar里设置，也可以像ActionBar那样，通过下面的两个回调方法来处理 */
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Log.v(TAG, "--------clicked :"+item.toString());
+
+                switch (item.getItemId()) {
+                    case R.id.homeAsUp:
+                    case R.id.action_done:
+                        Toast.makeText(NewProjectActivity.this, "Toolbar action_project_done", Toast.LENGTH_SHORT).show();
+                        Log.v(TAG, "--------clicked action_project_done btn!!!!");
+                        Intent intent = new Intent(NewProjectActivity.this, ProjectsListActivity.class);
+                        startActivity(intent);
+                        NewProjectActivity.this.finish();
+                        break;
+                }
+                return true;
+            }
+        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        Log.v("ProjectsListActivity", "---------onCreateOptionsMenu");
-        super.onCreateOptionsMenu(menu);
-        //getSupportMenuInflater().inflate(R.menu.menu_projects_list, menu);
-        MenuItem addMenuItem = menu.add("done").setIcon(R.drawable.ic_cab_done_holo_dark);
-        addMenuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        addMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                Intent intent = new Intent(NewProjectActivity.this, ProjectsListActivity.class);
-                startActivity(intent);
-                NewProjectActivity.this.finish();
-                return true;
-            }
-        });
-        return true;
+        //将菜单添加到toolbar
+        getMenuInflater().inflate(R.menu.menu_projects_new, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
 }

@@ -1,1 +1,1 @@
-include ':app', 'SystemBarTint', ':actionbarsherlock'
+include ':app', ':swipelistview'
