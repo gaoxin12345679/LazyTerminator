@@ -1,5 +1,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:swipe="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -9,24 +8,9 @@
 
     <include layout="@layout/toolbar_project_list"/>
 
-    <FrameLayout
+    <ListView
+        android:id="@+id/lv_project_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.fortysevendeg.swipelistview.SwipeListView
-            android:id="@+id/slv_project_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            swipe:swipeActionLeft="reveal"
-            swipe:swipeActionRight="reveal"
-            swipe:swipeAnimationTime="0"
-            swipe:swipeBackView="@+id/item_back"
-            swipe:swipeCloseAllItemsWhenMoveList="true"
-            swipe:swipeFrontView="@+id/item_front"
-            swipe:swipeMode="both"
-            swipe:swipeOffsetLeft="100dp"
-            swipe:swipeOffsetRight="100dp"
-            swipe:swipeOpenOnLongPress="false">
-        </com.fortysevendeg.swipelistview.SwipeListView>
-    </FrameLayout>
+        android:layout_height="match_parent"
+        ></ListView>
 </LinearLayout>

@@ -6,10 +6,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
 
-import com.fortysevendeg.swipelistview.BaseSwipeListViewListener;
-import com.fortysevendeg.swipelistview.SwipeListView;
 import com.stars.app.lazyterminator.R;
 import com.stars.app.lazyterminator.adapter.ProjectListAdapter;
 import com.stars.app.lazyterminator.model.Project;
@@ -22,10 +23,10 @@ public class ProjectsListActivity extends BaseActivity {
 
     public static String TAG = "ProjectsListActivity";
     private Toolbar mToolbar;
-    private SwipeListView mSwipeListView;
+    private ListView mListView;
     ProjectListAdapter mProjectListAdapter;
 
-    private List<Project> mProjectListTest = new ArrayList<Project>();
+    private List<Project> mTestData = new ArrayList<Project>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,44 +50,40 @@ public class ProjectsListActivity extends BaseActivity {
         Project p9 = new Project(9, "project9", 2);
         Project p10 = new Project(10, "project10", 2);
         Project p11 = new Project(11, "project11", 2);
-        mProjectListTest.add(p1);
-        mProjectListTest.add(p2);
-        mProjectListTest.add(p3);
-        mProjectListTest.add(p4);
-        mProjectListTest.add(p5);
-        mProjectListTest.add(p6);
-        mProjectListTest.add(p7);
-        mProjectListTest.add(p8);
-        mProjectListTest.add(p9);
-        mProjectListTest.add(p10);
-        mProjectListTest.add(p11);
+        Project p12 = new Project(12, "project12", 2);
+        Project p13 = new Project(13, "project13", 2);
+        Project p14 = new Project(14, "project14", 2);
+        Project p15 = new Project(15, "project15", 2);
+        Project p16 = new Project(16, "project16", 2);
+        Project p17 = new Project(17, "project17", 2);
+
+        mTestData.add(p1);
+        mTestData.add(p2);
+        mTestData.add(p3);
+        mTestData.add(p4);
+        mTestData.add(p5);
+        mTestData.add(p6);
+        mTestData.add(p7);
+        mTestData.add(p8);
+        mTestData.add(p9);
+        mTestData.add(p10);
+        mTestData.add(p11);
+        mTestData.add(p12);
+        mTestData.add(p13);
+        mTestData.add(p14);
+        mTestData.add(p15);
+        mTestData.add(p16);
+        mTestData.add(p17);
     }
 
     private void initSwipeListView() {
-        mSwipeListView = (SwipeListView) findViewById(R.id.slv_project_list);
-        mProjectListAdapter =
-                new ProjectListAdapter(this, mProjectListTest, mSwipeListView);
-        mSwipeListView.setAdapter(mProjectListAdapter);
-        mSwipeListView.setSwipeListViewListener(new BaseSwipeListViewListener(){
+        mListView = (ListView) findViewById(R.id.lv_project_list);
+        mProjectListAdapter = new ProjectListAdapter(this, mTestData, mListView);
+        mListView.setAdapter(mProjectListAdapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClickFrontView(int position) {
-                super.onClickFrontView(position);
-                Toast.makeText(getApplicationContext(), mProjectListTest.get(position)+" clicked", Toast.LENGTH_SHORT).show();
-            }
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-            @Override
-            public void onDismiss(int[] reverseSortedPositions) {
-                for (int position : reverseSortedPositions) {
-                    mProjectListTest.remove(position);
-                }
-                mProjectListAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onStartOpen(int position, int action, boolean right) {
-                // TODO Auto-generated method stub
-                super.onStartOpen(position, action, right);
-                mSwipeListView.closeOpenedItems();
             }
         });
     }

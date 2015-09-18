@@ -1,56 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="fill_parent"
-             android:layout_height="fill_parent" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="48dp"
+              android:background="#ffffff"
+              android:orientation="horizontal">
 
-    <LinearLayout
-        android:id="@+id/item_back"
+    <TextView
+        android:id="@+id/tv_project_name"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="#eee"
-        android:tag="back" >
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
 
-        <Button
-            android:id="@+id/example_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:background="@null" />
+    <ImageButton
+        android:id="@+id/btn_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_action_edit"
+        android:text="编辑"/>
 
-        <Button
-            android:id="@+id/btn_edit"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="@drawable/ic_action_edit"
-            android:text="编辑" />
+    <ImageButton
+        android:id="@+id/btn_del"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_action_delete"
+        android:text="删除"/>
 
-        <Button
-            android:id="@+id/btn_del"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/ic_action_del"
-            android:text="删除" />
-    </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/item_front"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="#ffffff"
-        android:orientation="vertical"
-        android:tag="front" >
-
-        <TextView
-            android:id="@+id/tv_project_name"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textSize="16sp" />
-    </RelativeLayout>
-
-</FrameLayout>
+</LinearLayout>

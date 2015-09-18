@@ -1,16 +1,15 @@
 package com.stars.app.lazyterminator.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.fortysevendeg.swipelistview.SwipeListView;
 import com.stars.app.lazyterminator.R;
 import com.stars.app.lazyterminator.model.Project;
 
@@ -21,23 +20,25 @@ import java.util.List;
  */
 public class ProjectListAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
-    private List<Project> mProjects;
-    private SwipeListView mSwipeListView;
+    private List<Project> mData;
+    private ListView mListView;
+    private Context mContext;
 
-    public ProjectListAdapter(Context context, List<Project> objects, SwipeListView swipeListView) {
-        this.mProjects = objects;
-        this.mSwipeListView = swipeListView;
+    public ProjectListAdapter(Context context, List<Project> data, ListView listView) {
+        this.mContext = context;
+        this.mData = data;
+        this.mListView = listView;
         this.mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return mProjects.size();
+        return mData.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mProjects.get(position);
+        return mData.get(position);
     }
 
     @Override
@@ -46,37 +47,46 @@ public class ProjectListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        //return super.getView(position, convertView, parent);
-        View view;
-        if (convertView == null) {
-            view = mInflater.inflate(R.layout.project_list_item, parent, false);
-        } else {
-            view = convertView;
+    public View getView(final int position, View convertView, final ViewGroup parent) {
+        ViewHolder holder;
+        if(convertView == null){
+            convertView = mInflater.inflate(R.layout.project_list_item, parent, false);
+            holder = new ViewHolder();
+            holder.tvTitle = (TextView)convertView.findViewById(R.id.tv_project_name);
+            holder.btnDel = (ImageButton)convertView.findViewById(R.id.btn_del);
+            holder.btnEdit = (ImageButton)convertView.findViewById(R.id.btn_edit);
+            convertView.setTag(holder);
+        }else {
+            holder = (ViewHolder)convertView.getTag();
         }
 
-        //获取project list item 中的控件
-        //ImageView ivPriority = (ImageView)view.findViewById(R.id.iv_priority);
-        TextView tvName = (TextView) view.findViewById(R.id.tv_project_name);
-        //ImageView ivDetail = (ImageView)view.findViewById(R.id.iv_project_detal);
-        Button btnEdit= (Button) view.findViewById(R.id.btn_edit);
-        Button btnDel= (Button) view.findViewById(R.id.btn_del);
+        if(mData!=null && mData.size()>0){
+            holder.tvTitle.setText(mData.get(position).getProjectName());
+        }
 
-        //设置项目名称
-        tvName.setText(mProjects.get(position).getProjectName());
-
-        //设置 删除按钮 的事件
-        btnDel.setOnClickListener(new View.OnClickListener() {
+        holder.btnDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.v("ProjectListAdapter", "--------btnDel");
-                mSwipeListView.closeAnimate(position);
-                mSwipeListView.dismiss(position);
+                Toast.makeText(mContext, "点击了删除button" + position, Toast.LENGTH_LONG).show();
+                mData.remove(position);
+                notifyDataSetChanged();
             }
         });
 
+        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext,"点击了修改button"+position,Toast.LENGTH_LONG).show();
+            }
+        });
+        return convertView;
+    }
 
 
-        return view;
+
+    static class ViewHolder {
+        TextView tvTitle;
+        ImageButton btnDel;
+        ImageButton btnEdit;
     }
 }
