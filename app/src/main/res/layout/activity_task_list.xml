@@ -2,14 +2,14 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@drawable/bg14thumb"
+              android:background="#9977aa55"
               android:orientation="vertical"
-              tools:context="com.stars.app.lazyterminator.activity.ProjectsListActivity">
+              tools:context="com.stars.app.lazyterminator.activity.TaskListActivity">
 
-    <include layout="@layout/toolbar_project_list"/>
+    <include layout="@layout/toolbar_task_list"/>
 
     <ListView
-        android:id="@+id/lv_project_list"
+        android:id="@+id/lv_task_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         ></ListView>

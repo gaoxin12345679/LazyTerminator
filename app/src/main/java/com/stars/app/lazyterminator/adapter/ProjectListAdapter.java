@@ -5,10 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.stars.app.lazyterminator.R;
 import com.stars.app.lazyterminator.model.Project;
@@ -53,8 +51,8 @@ public class ProjectListAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.project_list_item, parent, false);
             holder = new ViewHolder();
             holder.tvTitle = (TextView)convertView.findViewById(R.id.tv_project_name);
-            holder.btnDel = (ImageButton)convertView.findViewById(R.id.btn_del);
-            holder.btnEdit = (ImageButton)convertView.findViewById(R.id.btn_edit);
+            //holder.btnDel = (ImageButton)convertView.findViewById(R.id.btn_del);
+            //holder.btnEdit = (ImageButton)convertView.findViewById(R.id.btn_edit);
             convertView.setTag(holder);
         }else {
             holder = (ViewHolder)convertView.getTag();
@@ -64,21 +62,21 @@ public class ProjectListAdapter extends BaseAdapter {
             holder.tvTitle.setText(mData.get(position).getProjectName());
         }
 
-        holder.btnDel.setOnClickListener(new View.OnClickListener() {
+       /* holder.btnDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext, "点击了删除button" + position, Toast.LENGTH_LONG).show();
                 mData.remove(position);
                 notifyDataSetChanged();
             }
-        });
+        });*/
 
-        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
+        /*holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext,"点击了修改button"+position,Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
         return convertView;
     }
 
@@ -86,7 +84,7 @@ public class ProjectListAdapter extends BaseAdapter {
 
     static class ViewHolder {
         TextView tvTitle;
-        ImageButton btnDel;
-        ImageButton btnEdit;
+        //ImageButton btnDel;
+        //ImageButton btnEdit;
     }
 }

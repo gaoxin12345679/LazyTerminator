@@ -7,27 +7,29 @@ import android.database.sqlite.SQLiteOpenHelper;
 /**
  * Created by Administrator on 2015/9/15.
  */
-public class LTDBOpenHelper extends SQLiteOpenHelper {
+public class DBHelper extends SQLiteOpenHelper {
     /**
      *  project表建表语句
      */
     public static final String CREATE_TB_PROJECT = "create table tb_project ("
             + "project_id integer primary key autoincrement, "
-            + "project_name text, "
-            + "project_priority text)";
+            + "project_name text no null unique, "
+            + "project_priority integer no null default 1,"
+            + "project_desc text ,"
+            + "project_createDate text)";
     /**
      *  task表建表语句
      */
     public static final String CREATE_TB_TASK = "create table tb_task ("
             + "task_id integer primary key autoincrement, "
-            + "project_id intger no null,"
-            + "task_name text, "
+            + "project_id integer no null,"
+            + "task_name text no null, "
             + "task_process text"
             + "task_priority text)";
 
 
-    public LTDBOpenHelper(Context context, String name,
-                          SQLiteDatabase.CursorFactory factory, int version) {
+    public DBHelper(Context context, String name,
+                    SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 

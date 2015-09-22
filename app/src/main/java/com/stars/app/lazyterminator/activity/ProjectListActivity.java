@@ -9,85 +9,68 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.stars.app.lazyterminator.R;
 import com.stars.app.lazyterminator.adapter.ProjectListAdapter;
+import com.stars.app.lazyterminator.db.DBManager;
 import com.stars.app.lazyterminator.model.Project;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ProjectsListActivity extends BaseActivity {
+public class ProjectListActivity extends BaseActivity {
 
-    public static String TAG = "ProjectsListActivity";
+    public static String TAG = "ProjectListActivity";
     private Toolbar mToolbar;
     private ListView mListView;
     ProjectListAdapter mProjectListAdapter;
 
-    private List<Project> mTestData = new ArrayList<Project>();
+    private List<Project> mData = new ArrayList<Project>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_projects_list);
-        initProjectListTestData();
+        setContentView(R.layout.activity_project_list);
+        getProjectDataFromDB();
         initToolBar();
-        initSwipeListView();
+        initListView();
     }
 
-    private void initProjectListTestData() {
-        Project p1 = new Project(1, "project1", 2);
-        Project p2 = new Project(2, "project2", 2);
-        Project p3 = new Project(3, "project3", 2);
-        Project p4 = new Project(4, "project4", 2);
-        Project p5 = new Project(5, "project5", 2);
-        Project p6 = new Project(6, "project6", 2);
-        Project p7 = new Project(7, "project7", 2);
-        Project p8 = new Project(8, "project8", 2);
-        Project p9 = new Project(9, "project9", 2);
-        Project p10 = new Project(10, "project10", 2);
-        Project p11 = new Project(11, "project11", 2);
-        Project p12 = new Project(12, "project12", 2);
-        Project p13 = new Project(13, "project13", 2);
-        Project p14 = new Project(14, "project14", 2);
-        Project p15 = new Project(15, "project15", 2);
-        Project p16 = new Project(16, "project16", 2);
-        Project p17 = new Project(17, "project17", 2);
-
-        mTestData.add(p1);
-        mTestData.add(p2);
-        mTestData.add(p3);
-        mTestData.add(p4);
-        mTestData.add(p5);
-        mTestData.add(p6);
-        mTestData.add(p7);
-        mTestData.add(p8);
-        mTestData.add(p9);
-        mTestData.add(p10);
-        mTestData.add(p11);
-        mTestData.add(p12);
-        mTestData.add(p13);
-        mTestData.add(p14);
-        mTestData.add(p15);
-        mTestData.add(p16);
-        mTestData.add(p17);
+    /**
+     * 从数据库中查询出所有的项目信息
+     */
+    private void getProjectDataFromDB() {
+        DBManager mDBManager = new DBManager(this);
+        mData = mDBManager.queryAllProject();
     }
 
-    private void initSwipeListView() {
+    /**
+     * 初始化listview
+     */
+    private void initListView() {
         mListView = (ListView) findViewById(R.id.lv_project_list);
-        mProjectListAdapter = new ProjectListAdapter(this, mTestData, mListView);
+        mProjectListAdapter = new ProjectListAdapter(this, mData, mListView);
         mListView.setAdapter(mProjectListAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.v(TAG, "----onItemClick:" + position);
+                //点击listview的条目 进入到project详情界面，并将项目名称传递给task界面
 
+                Project project = mData.get(position);
+
+                Intent intent = new Intent(ProjectListActivity.this, TaskListActivity.class);
+                intent.putExtra("project_name", project.getProjectName());
+                startActivity(intent);
             }
         });
     }
 
+    /**
+     * 初始化toolbar
+     */
     private void initToolBar() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar_project_list);
         mToolbar.setTitle("Project List");
@@ -99,9 +82,9 @@ public class ProjectsListActivity extends BaseActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_newproject:
-                        Toast.makeText(ProjectsListActivity.this, "Toolbar action_newproject", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(ProjectListActivity.this, "Toolbar action_newproject", Toast.LENGTH_SHORT).show();
                         Log.v(TAG, "--------clicked new project btn!!!!");
-                        Intent intent = new Intent(ProjectsListActivity.this, NewProjectActivity.class);
+                        Intent intent = new Intent(ProjectListActivity.this, NewProjectActivity.class);
                         startActivity(intent);
                         break;
                 }
@@ -114,7 +97,7 @@ public class ProjectsListActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //将菜单添加到toolbar
-        getMenuInflater().inflate(R.menu.menu_projects_list, menu);
+        getMenuInflater().inflate(R.menu.menu_project_list, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

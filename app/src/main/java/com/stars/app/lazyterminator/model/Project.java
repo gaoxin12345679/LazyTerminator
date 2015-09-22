@@ -4,22 +4,25 @@ package com.stars.app.lazyterminator.model;
  * Created by Administrator on 2015/9/15.
  */
 public class Project {
-    private int projectId;
     private String projectName;
+    private String projectDesc;
     private int projectPriority;
+    private String createDate;
 
-    public Project(int projectId, String projectName) {
-        this.projectId = projectId;
-        this.projectName = projectName;
-        this.projectPriority = 1;
-    }
-
-    public Project(int projectId, String projectName, int projectPriority) {
-        this.projectId = projectId;
+    public Project(){}
+    public Project( String projectName, int projectPriority, String projectDesc, String createDate) {
         this.projectName = projectName;
         this.projectPriority = projectPriority;
+        this.projectDesc = projectDesc;
+        this.createDate = createDate;
+    }
+    public String getProjectDesc() {
+        return projectDesc;
     }
 
+    public void setProjectDesc(String projectDesc) {
+        this.projectDesc = projectDesc;
+    }
     public int getProjectPriority() {
         return projectPriority;
     }
@@ -28,9 +31,6 @@ public class Project {
         this.projectPriority = projectPriority;
     }
 
-    public int getProjectId() {
-        return projectId;
-    }
 
     public String getProjectName() {
         return projectName;
@@ -40,20 +40,26 @@ public class Project {
         this.projectName = projectName;
     }
 
-    public void setProjectId(int projectId) {
-        this.projectId = projectId;
+
+    public void renameProject(String newName){
+        this.projectName = newName;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
     }
 
     @Override
     public String toString() {
         return "Project{" +
-                "projectId=" + projectId +
                 ", projectName='" + projectName + '\'' +
-                ", projectPriority='" + projectPriority + '\'' +
+                ", projectDesc='" + projectDesc + '\'' +
+                ", projectPriority=" + projectPriority +
+                ", createDate=" + createDate +
                 '}';
-    }
-
-    public void renameProject(String newName){
-        this.projectName = newName;
     }
 }
